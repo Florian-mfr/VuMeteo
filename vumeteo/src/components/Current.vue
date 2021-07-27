@@ -1,58 +1,56 @@
 <template>
   <div class="current">
-    <div class="container" v-if="weather !== {}">
-      <h1>{{location.name}}, {{location.country}}</h1>
-      <span>{{weather.temp_c}}°</span>
-      <i v-bind:class="{'fas fa-cloud-sun': isCloudSun}"></i>
+    <div class="container" v-if="iconPath">
+      <h1>{{ location.name }}, {{ location.country }}</h1>
+      <span>{{ weather.temp_c }}°</span>
+      <img :src="iconPath" :alt="weather.condition.text" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
   name: "Current",
   data: () => {
     return {
-      weatherIcon: weather.condition.text
-    }
+    };
   },
-  methods:{
-    isCloudSun: () => {
-      if(weatherIcon === "Partly cloud") {
-        return true
-      } return false
-    }
-  },
+  methods: {},
   computed: {
     ...mapState({
-      weather: 'currentWeather',
-      location: 'locationWeather'
-    })
-  }
+      weather: "currentWeather",
+      location: "locationWeather",
+      iconPath: 'iconPath'
+    }),
+  },
 };
 </script>
 
 <style lang="scss">
-@import '../settings.scss';
+@import "../settings.scss";
 .current {
   .container {
     @include flex-center;
     flex-direction: column;
-    background-image: url('../assets/Cover.jpg');
+    //background: linear-gradient(#ffedb2, #a76b43);
+    background: linear-gradient(#547696, #0f244b);
     background-size: cover;
     background-position: center;
     height: 100vh;
+    color: $white;
     h1 {
-      margin: 20px 0 10px;
-      font-size: 30px;
+      margin: 20px 5px;
+      font-size: 35px;
+      text-align: center;
     }
     span {
-      font-size: 35px;
+      font-size: 40px;
+      font-weight: 600;
       margin-bottom: 10px;
     }
-    i {
-      font-size: 50px;
+    img {
+      width: 120px;
     }
   }
 }
