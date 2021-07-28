@@ -6,9 +6,8 @@
     </div>
 
     <Current />
+      <Forecast />
     <router-link to="/details">
-      <Forecast
-      />
     </router-link>
   </div>
 </template>

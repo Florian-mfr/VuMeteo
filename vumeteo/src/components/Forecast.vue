@@ -1,13 +1,16 @@
 <template>
-    <div class="forecast">
-        {{ value }}
-    </div>
+    <h1>{{forecast[0].temp_c}}</h1>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     name: 'Forecast',
-    props: ['id','value']
-
+    computed: {
+        ...mapState({
+      forecast: "hoursForecast",
+      iconPath: "iconPath",
+    }),
+    }
 }
 </script>

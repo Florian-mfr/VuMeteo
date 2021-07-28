@@ -8,19 +8,22 @@ const instance = axios.create({
 export default createStore({
   state: {
     currentWeather: {},
-    forecastWeather: {},
     locationWeather: {},
-    iconPath: ''
+    iconPath: '',
+    hoursForecast: []
   },
   mutations: {
-    getWeather: (state, weather) => {
+    getCurrentWeather: (state, weather) => {
       state.currentWeather = weather.current
-      state.forecastWeather = weather.forecast
       state.locationWeather = weather.location
     },
-    getIconPath: (state, weather) => {
-      let url = weather.current.condition.icon.split("com");
+    getIconPath: (state, condition) => {
+      let url = condition.icon.split("com");
       state.iconPath = '../img' + url[1]
+    },
+    getDayWeather: (state, weather) => {
+      console.log(weather.forecast.forecastday[0].hour)
+      state.hoursForecast = weather.forecast.forecastday[0].hour
     }
   },
   actions: {
@@ -28,8 +31,9 @@ export default createStore({
       return new Promise((resolve, reject) => {
         instance.get(`forecast.json?key=92de2517212e42e78a4193948212507&q=${city}&aqi=no&days=3`)
           .then(res => {
-            commit('getIconPath', res.data);
-            commit('getWeather', res.data);
+            commit('getIconPath', res.data.current.condition);
+            commit('getCurrentWeather', res.data);
+            commit('getDayWeather', res.data);
             resolve(res)
           })
           .catch(err => reject(err))

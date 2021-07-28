@@ -13,15 +13,14 @@ import { mapState } from "vuex";
 export default {
   name: "Current",
   data: () => {
-    return {
-    };
+    return {};
   },
   methods: {},
   computed: {
     ...mapState({
       weather: "currentWeather",
       location: "locationWeather",
-      iconPath: 'iconPath'
+      iconPath: "iconPath",
     }),
   },
 };
@@ -30,14 +29,15 @@ export default {
 <style lang="scss">
 @import "../settings.scss";
 .current {
+  background: linear-gradient(#997d4a, #406180);
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
   .container {
     @include flex-center;
     flex-direction: column;
-    //background: linear-gradient(#ffedb2, #a76b43);
-    background: linear-gradient(#547696, #0f244b);
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+    height: 100%;
+    padding-top: 20px;
     color: $white;
     h1 {
       margin: 20px 5px;
@@ -53,5 +53,8 @@ export default {
       width: 120px;
     }
   }
+}
+.day {
+  background: linear-gradient(#c08964, #ffedb2);
 }
 </style>
