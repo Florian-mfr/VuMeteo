@@ -22,8 +22,8 @@ export default createStore({
       state.iconPath = '../img' + url[1]
     },
     getDayWeather: (state, weather) => {
-      console.log(weather.forecast.forecastday[0].hour)
-      state.hoursForecast = weather.forecast.forecastday[0].hour
+      console.log(weather.forecast.forecastday)
+      state.hoursForecast = weather.forecast.forecastday
     }
   },
   actions: {
